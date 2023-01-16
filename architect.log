@@ -1,0 +1,298 @@
+0    [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ArchitectUtils  - Log4J configured successfully
+723  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+793  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+801  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Beginning to read/merge new pl.ini data
+837  [AWT-EventQueue-0] INFO  ca.sqlpower.sql.PlDotIni  - Finished reading file.
+10689 [AWT-EventQueue-0] ERROR ca.sqlpower.architect.swingui.KettleDataSourceOptionsPanel  -  The map is: {}
+16819 [AWT-EventQueue-0] ERROR ca.sqlpower.architect.swingui.KettleDataSourceOptionsPanel  -  The map is: {Hostname=, Port=5432, Database=}
+16823 [AWT-EventQueue-0] ERROR ca.sqlpower.architect.swingui.KettleDataSourceOptionsPanel  -  The map is: {Hostname=, Port=5432, Database=}
+23137 [Thread-5] ERROR ca.sqlpower.architect.swingui.action.CheckForUpdateAction  - Fail to retrieve current version number!
+29275 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.JDBCDataSource  - Driver Class org.postgresql.Driver loaded without exception
+29423 [AWT-EventQueue-0] INFO  ca.sqlpower.sql.JDBCDataSource  - Driver Class org.postgresql.Driver loaded without exception
+30452 [PokeDB: hepyshop] INFO  ca.sqlpower.sql.JDBCDataSource  - Driver Class org.postgresql.Driver loaded without exception
+35772 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+CREATE SEQUENCE public.unidad_medida_unidad_medida_id_seq_1
+35776 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.unidad_medida (
+                unidad_medida_id BIGINT NOT NULL DEFAULT nextval('public.unidad_medida_unidad_medida_id_seq_1'),
+                unidad_medida_descri VARCHAR(2000) NOT NULL,
+                CONSTRAINT unidad_medida_pk PRIMARY KEY (unidad_medida_id)
+)
+35777 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.unidad_medida_unidad_medida_id_seq_1 OWNED BY public.unidad_medida.unidad_medida_id
+35777 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.categoria_producto_categoria_producto_id_seq
+35777 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.categoria_producto (
+                categoria_producto_id BIGINT NOT NULL DEFAULT nextval('public.categoria_producto_categoria_producto_id_seq'),
+                categoria_producto_descri VARCHAR(1000) NOT NULL,
+                CONSTRAINT categoria_producto_pk PRIMARY KEY (categoria_producto_id)
+)
+35778 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.categoria_producto_categoria_producto_id_seq OWNED BY public.categoria_producto.categoria_producto_id
+35778 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.estado_producto_estado_producto_id_seq_1
+35778 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.estado_producto (
+                estado_producto_id BIGINT NOT NULL DEFAULT nextval('public.estado_producto_estado_producto_id_seq_1'),
+                estado_producto_descri VARCHAR(1000) NOT NULL,
+                CONSTRAINT estado_producto_pk PRIMARY KEY (estado_producto_id)
+)
+35778 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.estado_producto_estado_producto_id_seq_1 OWNED BY public.estado_producto.estado_producto_id
+35778 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE SEQUENCE public.producto_producto_id_seq
+35779 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.producto (
+                producto_id BIGINT NOT NULL DEFAULT nextval('public.producto_producto_id_seq'),
+                producto_nombre VARCHAR(1000) NOT NULL,
+                estado_producto_id BIGINT NOT NULL,
+                producto_cantidad INTEGER DEFAULT 0 NOT NULL,
+                unidad_medida_id BIGINT NOT NULL,
+                CONSTRAINT producto_pk PRIMARY KEY (producto_id)
+)
+35779 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.producto_producto_id_seq OWNED BY public.producto.producto_id
+35779 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.imagen (
+                imagen_url VARCHAR(2000) NOT NULL,
+                producto_id BIGINT NOT NULL,
+                CONSTRAINT imagen_pk PRIMARY KEY (imagen_url, producto_id)
+)
+35779 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+CREATE TABLE public.categoria_detalle (
+                categoria_producto_id BIGINT NOT NULL,
+                producto_id BIGINT NOT NULL,
+                CONSTRAINT categoria_detalle_pk PRIMARY KEY (categoria_producto_id, producto_id)
+)
+35780 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+CREATE SEQUENCE public.usuario_usuario_id_seq
+35780 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+CREATE TABLE public.usuario (
+                usuario_id BIGINT NOT NULL DEFAULT nextval('public.usuario_usuario_id_seq'),
+                usuario_nombre VARCHAR(200) NOT NULL,
+                usuario_password VARCHAR NOT NULL,
+                usuario_correo VARCHAR(200) NOT NULL,
+                usuario_aprobado BOOLEAN NOT NULL,
+                usuario_admin BOOLEAN DEFAULT FALSE NOT NULL,
+                CONSTRAINT usuario_pk PRIMARY KEY (usuario_id)
+)
+35780 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+
+ALTER SEQUENCE public.usuario_usuario_id_seq OWNED BY public.usuario.usuario_id
+35780 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.producto ADD CONSTRAINT unidad_medida_producto_fk
+FOREIGN KEY (unidad_medida_id)
+REFERENCES public.unidad_medida (unidad_medida_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+35781 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.categoria_detalle ADD CONSTRAINT categoria_producto_categoria_detalle_fk
+FOREIGN KEY (categoria_producto_id)
+REFERENCES public.categoria_producto (categoria_producto_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+35781 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.producto ADD CONSTRAINT estado_producto_producto_fk
+FOREIGN KEY (estado_producto_id)
+REFERENCES public.estado_producto (estado_producto_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+35781 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.categoria_detalle ADD CONSTRAINT producto_categoria_detalle_fk
+FOREIGN KEY (producto_id)
+REFERENCES public.producto (producto_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+35781 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.ddl.GenericDDLGenerator  - endStatement: 
+
+ALTER TABLE public.imagen ADD CONSTRAINT producto_imagen_fk
+FOREIGN KEY (producto_id)
+REFERENCES public.producto (producto_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+35784 [AWT-EventQueue-0] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - The list size is :22
+36754 [Thread-7] INFO  ca.sqlpower.sql.JDBCDataSource  - Driver Class org.postgresql.Driver loaded without exception
+36784 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+36791 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+36791 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+36793 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+36793 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+36794 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+36794 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+36795 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+36797 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+36799 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Sequence conflicts not supported.
+36799 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Relationship conflicts are not supported yet!
+36799 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Relationship conflicts are not supported yet!
+36799 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Relationship conflicts are not supported yet!
+36799 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Relationship conflicts are not supported yet!
+36799 [Thread-7] ERROR ca.sqlpower.architect.ddl.ConflictResolver  - Relationship conflicts are not supported yet!
+36803 [Thread-9] INFO  ca.sqlpower.sql.JDBCDataSource  - Driver Class org.postgresql.Driver loaded without exception
+36836 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Starting DDL Generation at Mon Jan 16 07:19:53 PYST 2023
+36836 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Database Target: PlayPen Database
+36836 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Playpen Dump: PlayPen Database
+36837 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+CREATE SEQUENCE public.unidad_medida_unidad_medida_id_seq_1
+36846 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE TABLE public.unidad_medida (
+                unidad_medida_id BIGINT NOT NULL DEFAULT nextval('public.unidad_medida_unidad_medida_id_seq_1'),
+                unidad_medida_descri VARCHAR(2000) NOT NULL,
+                CONSTRAINT unidad_medida_pk PRIMARY KEY (unidad_medida_id)
+)
+36857 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+
+ALTER SEQUENCE public.unidad_medida_unidad_medida_id_seq_1 OWNED BY public.unidad_medida.unidad_medida_id
+36858 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE SEQUENCE public.categoria_producto_categoria_producto_id_seq
+36859 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE TABLE public.categoria_producto (
+                categoria_producto_id BIGINT NOT NULL DEFAULT nextval('public.categoria_producto_categoria_producto_id_seq'),
+                categoria_producto_descri VARCHAR(1000) NOT NULL,
+                CONSTRAINT categoria_producto_pk PRIMARY KEY (categoria_producto_id)
+)
+36868 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+
+ALTER SEQUENCE public.categoria_producto_categoria_producto_id_seq OWNED BY public.categoria_producto.categoria_producto_id
+36870 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE SEQUENCE public.estado_producto_estado_producto_id_seq_1
+36872 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE TABLE public.estado_producto (
+                estado_producto_id BIGINT NOT NULL DEFAULT nextval('public.estado_producto_estado_producto_id_seq_1'),
+                estado_producto_descri VARCHAR(1000) NOT NULL,
+                CONSTRAINT estado_producto_pk PRIMARY KEY (estado_producto_id)
+)
+36876 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+
+ALTER SEQUENCE public.estado_producto_estado_producto_id_seq_1 OWNED BY public.estado_producto.estado_producto_id
+36877 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE SEQUENCE public.producto_producto_id_seq
+36879 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE TABLE public.producto (
+                producto_id BIGINT NOT NULL DEFAULT nextval('public.producto_producto_id_seq'),
+                producto_nombre VARCHAR(1000) NOT NULL,
+                estado_producto_id BIGINT NOT NULL,
+                producto_cantidad INTEGER DEFAULT 0 NOT NULL,
+                unidad_medida_id BIGINT NOT NULL,
+                CONSTRAINT producto_pk PRIMARY KEY (producto_id)
+)
+36884 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+
+ALTER SEQUENCE public.producto_producto_id_seq OWNED BY public.producto.producto_id
+36884 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE TABLE public.imagen (
+                imagen_url VARCHAR(2000) NOT NULL,
+                producto_id BIGINT NOT NULL,
+                CONSTRAINT imagen_pk PRIMARY KEY (imagen_url, producto_id)
+)
+36890 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+
+CREATE TABLE public.categoria_detalle (
+                categoria_producto_id BIGINT NOT NULL,
+                producto_id BIGINT NOT NULL,
+                CONSTRAINT categoria_detalle_pk PRIMARY KEY (categoria_producto_id, producto_id)
+)
+36893 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+
+CREATE SEQUENCE public.usuario_usuario_id_seq
+36893 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+CREATE TABLE public.usuario (
+                usuario_id BIGINT NOT NULL DEFAULT nextval('public.usuario_usuario_id_seq'),
+                usuario_nombre VARCHAR(200) NOT NULL,
+                usuario_password VARCHAR NOT NULL,
+                usuario_correo VARCHAR(200) NOT NULL,
+                usuario_aprobado BOOLEAN NOT NULL,
+                usuario_admin BOOLEAN DEFAULT FALSE NOT NULL,
+                CONSTRAINT usuario_pk PRIMARY KEY (usuario_id)
+)
+36900 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+
+ALTER SEQUENCE public.usuario_usuario_id_seq OWNED BY public.usuario.usuario_id
+36901 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+ALTER TABLE public.producto ADD CONSTRAINT unidad_medida_producto_fk
+FOREIGN KEY (unidad_medida_id)
+REFERENCES public.unidad_medida (unidad_medida_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+36903 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+ALTER TABLE public.categoria_detalle ADD CONSTRAINT categoria_producto_categoria_detalle_fk
+FOREIGN KEY (categoria_producto_id)
+REFERENCES public.categoria_producto (categoria_producto_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+36904 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+ALTER TABLE public.producto ADD CONSTRAINT estado_producto_producto_fk
+FOREIGN KEY (estado_producto_id)
+REFERENCES public.estado_producto (estado_producto_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+36905 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+ALTER TABLE public.categoria_detalle ADD CONSTRAINT producto_categoria_detalle_fk
+FOREIGN KEY (producto_id)
+REFERENCES public.producto (producto_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+36906 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - executing: 
+
+ALTER TABLE public.imagen ADD CONSTRAINT producto_imagen_fk
+FOREIGN KEY (producto_id)
+REFERENCES public.producto (producto_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE
+36907 [Thread-9] INFO  ca.sqlpower.architect.swingui.SQLScriptDialog  - Successfully executed 22 out of 22 statements.
