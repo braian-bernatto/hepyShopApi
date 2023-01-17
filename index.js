@@ -5,6 +5,7 @@ const app = express()
 const multer = require('multer')
 const { v4: uuidv4 } = require('uuid')
 const bodyParser = require('body-parser')
+const morgan = require('morgan')
 
 const storage = multer.diskStorage({
   destination: 'public/images',
@@ -13,12 +14,15 @@ const storage = multer.diskStorage({
   }
 })
 
-// app.use(express.urlencoded({ extended: false }))
-app.use(
-  bodyParser.urlencoded({
-    extended: true
-  })
-)
+app.use(express.urlencoded({ extended: false }))
+// app.use(
+//   bodyParser.urlencoded({
+//     extended: true
+//   })
+// )
+
+app.use(morgan('dev'))
+
 app.use(express.json())
 app.use(
   multer({

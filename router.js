@@ -23,11 +23,12 @@ const auth = require('./middleware/auth')
 const isAdmin = require('./middleware/isAdmin')
 const isAprobado = require('./middleware/isAprobado')
 
-apiRouter.use(
-  cors({
-    origin: '*'
-  })
-)
+// habilitando cors
+const opcionesCors = {
+  origin: '*'
+}
+
+apiRouter.use(cors(opcionesCors))
 
 apiRouter.get('/', (req, res) => {
   res.json('Shop API is running successfully')
